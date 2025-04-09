@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#simon-game{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+  
+#game-header{
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.game-status p,
+.score-board p {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+#game-display {
+    height: 600px;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;  
+    box-sizing: border-box;
+    background: #ddd;
+    border: solid black 1px;
+}
+
+.color-button{
+    width: calc(50% - 10px);
+    height: calc(50% - 10px);
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-color: beige;
+}

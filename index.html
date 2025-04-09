@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon Game</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    
+    <div id="simon-game">
+
+        <!-- Header Section -->
+        <div class="game-header">
+            <h1>Simon Game</h1>
+        </div>
+
+        <!-- Status / Level Display -->
+        <div class="game-status">
+            <p id="status-text">Start!</p>
+        </div>
+
+        <!-- Color Button Area -->
+        <div class="color-buttons" id="game-display">
+            <div class="color-button" id="btn-red">Red</div>
+            <div class="color-button" id="btn-green">Green</div>
+            <div class="color-button" id="btn-blue">Blue</div>
+            <div class="color-button" id="btn-yellow">Yellow</div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-board">
+            <p>Score: <span id="score-value">0</span></p>
+        </div>
+
+        <!-- Game Over Popup -->
+        <div id="game-over-popup" class="hidden">
+            <div class="popup-content">
+                <h2>Game Over</h2>
+            </div>
+        </div>
+
+    </div>
+
     <script src="app.js"></script>
 </body>
+
 </html>
