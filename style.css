@@ -88,18 +88,22 @@ body {
     }
 }
 
-#btn-red {
+.flash {
+    filter: brightness(150%);
+}
+
+#red {
     background-color: #e74c3c;
 }
 
-#btn-green {
+#green {
     background-color: #2ecc71;
 }
 
-#btn-blue {
+#blue {
     background-color: #3498db;
 }
 
-#btn-yellow {
+#yellow {
     background-color: #f1c40f;
 }
