@@ -1,8 +1,8 @@
 const statusText = document.getElementById("status-text");
 const colorButtons = document.querySelectorAll(".color-button");
 const scoreBoard = document.getElementById("score-value");
+const startButton = document.getElementById("start-btn");
 
-let startGame = false;  
 let level = 0;
 let score = 0;
 let randomColorPattern = [];
@@ -17,6 +17,14 @@ const yellowSound = new Audio("sounds/562761__ion__g3.mp3");
 const gameOverSound = new Audio("sounds/173859__jivatma07__j1game_over_mono.wav");
 const levelUpSound = new Audio("sounds/404359__kagateni__success2.wav");
 
+// Add click listener for start buttons
+startButton.addEventListener('click', () => {
+    startButton.classList.add('disabled');
+    startButton.disabled = true;
+    nextSequence();
+    return;
+})
+
 // Add click listener for all buttons
 colorButtons.forEach(button => {
     button.addEventListener('click', handleUserClick)
@@ -24,13 +32,6 @@ colorButtons.forEach(button => {
 
 //// Handles user's color clicks
 function handleUserClick(event) {
-    //Start the game on first click
-    if (!startGame) {
-        startGame = true;
-        nextSequence();
-        return;
-    }
-
     const userChosenColor = event.target.id;
     userPattern.push(userChosenColor);
     flashButton(userChosenColor);
@@ -54,7 +55,7 @@ function nextSequence() {
     setTimeout(() => {
         let randomColor = randomColorGenerator();
         randomColorPattern.push(randomColor);
-    
+
         // Flash each color in the pattern with delay
         let i = 0;
         const interval = setInterval(() => {
@@ -65,7 +66,7 @@ function nextSequence() {
                 clearInterval(interval);
             }
         }, 600);
-    },800);
+    }, 800);
 }
 
 // Generate one random color
@@ -130,7 +131,8 @@ function gameOver() {
     document.getElementById("game-over-popup").classList.remove("hidden");
 
     // Reset
-    startGame = false;
+    startButton.classList.remove('disabled'); 
+    startButton.disabled = false;
     level = 0;
     score = 0;
     randomColorPattern = [];

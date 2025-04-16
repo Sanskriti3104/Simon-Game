@@ -35,6 +35,35 @@ body {
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
+.start-container {
+    text-align: center;
+}
+
+#start-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #444;
+    /* Dark grey for subtle look */
+    color: #f1f1f1;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#start-btn:hover {
+    background-color: #666;
+    transform: scale(1.03);
+}
+
+#start-btn.disabled {
+    background-color: #666 !important;  /* Make it look like it's in hover state */
+    cursor: not-allowed;                 /* Change cursor to indicate unclickable */
+    transform: scale(1);                 /* Remove scaling effect */
+}
+
 .game-status p,
 .score-board p {
     font-size: 1.2rem;
