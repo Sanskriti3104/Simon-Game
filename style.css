@@ -46,7 +46,6 @@ body {
     border: none;
     border-radius: 0.4rem;
     background-color: #444;
-    /* Dark grey for subtle look */
     color: #f1f1f1;
     cursor: pointer;
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
@@ -59,16 +58,9 @@ body {
 }
 
 #start-btn.disabled {
-    background-color: #666 !important;  /* Make it look like it's in hover state */
-    cursor: not-allowed;                 /* Change cursor to indicate unclickable */
-    transform: scale(1);                 /* Remove scaling effect */
-}
-
-.game-status p,
-.score-board p {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #aaa;
+    background-color: #666 !important;
+    cursor: not-allowed;
+    transform: scale(1);
 }
 
 #game-display {
@@ -135,4 +127,52 @@ body {
 
 #yellow {
     background-color: #f1c40f;
+}
+
+.score-board p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #aaa;
+}
+
+.blur {
+    filter: blur(10px);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box {
+    background: #1c1c1c;
+    color: #f1f1f1;
+    padding: 30px 40px;
+    border-radius: 1rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    font-size: 1.8rem;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    animation: popupFade 0.3s ease-in-out;
+}
+
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

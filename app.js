@@ -1,6 +1,7 @@
 const colorButtons = document.querySelectorAll(".color-button");
 const scoreBoard = document.getElementById("score-value");
 const startButton = document.getElementById("start-btn");
+const popup = document.getElementById('popup');
 
 let score = 0;
 let randomColorPattern = [];
@@ -22,22 +23,6 @@ startButton.addEventListener('click', () => {
     return;
 })
 
-// Add click listener for all buttons
-colorButtons.forEach(button => {
-    button.addEventListener('click', handleUserClick)
-});
-
-//// Handles user's color clicks
-function handleUserClick(event) {
-    const userChosenColor = event.target.id;
-    userPattern.push(userChosenColor);
-    flashButton(userChosenColor);
-    console.log("User Chosen Color : " + userChosenColor);
-
-    //Check the user's answer after each click
-    checkPattern(userPattern.length - 1);
-}
-
 //Generate next color in the sequence
 function nextSequence() {
     userPattern = [];
@@ -55,6 +40,22 @@ function nextSequence() {
             clearInterval(interval);
         }
     }, 600);
+}
+
+// Add click listener for all buttons
+colorButtons.forEach(button => {
+    button.addEventListener('click', handleUserClick)
+});
+
+//// Handles user's color clicks
+function handleUserClick(event) {
+    const userChosenColor = event.target.id;
+    userPattern.push(userChosenColor);
+    flashButton(userChosenColor);
+    console.log("User Chosen Color : " + userChosenColor);
+
+    //Check the user's answer after each click
+    checkPattern(userPattern.length - 1);
 }
 
 // Generate one random color
@@ -120,12 +121,24 @@ function scoreUpdate(score) {
 function gameOver() {
     gameOverSound.currentTime = 0;
     gameOverSound.play();
-    document.getElementById("game-over-popup").classList.remove("hidden");
 
-    // Reset
+    const gameContainer = document.getElementById('simon-game'); // Changed from 'content' to 'simon-game'
+    popup.style.display = 'flex';
+    gameContainer.classList.add('blur');
+
+    setTimeout(() => {
+        popup.style.display = 'none';
+        gameContainer.classList.remove('blur');
+        resetGame();
+    }, 3000);
+}
+
+// Function to reset the game 
+function resetGame() {
     startButton.classList.remove('disabled');
     startButton.disabled = false;
-    scoreUpdate(0);
+    score = 0;
+    scoreUpdate(score);
     randomColorPattern = [];
     userPattern = [];
 }
