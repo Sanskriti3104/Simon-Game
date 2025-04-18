@@ -1,9 +1,7 @@
-const statusText = document.getElementById("status-text");
 const colorButtons = document.querySelectorAll(".color-button");
 const scoreBoard = document.getElementById("score-value");
 const startButton = document.getElementById("start-btn");
 
-let level = 0;
 let score = 0;
 let randomColorPattern = [];
 let userPattern = [];
@@ -15,7 +13,6 @@ const greenSound = new Audio("sounds/562758__ion__c4.mp3");
 const blueSound = new Audio("sounds/562752__ion__b3.mp3");
 const yellowSound = new Audio("sounds/562761__ion__g3.mp3");
 const gameOverSound = new Audio("sounds/173859__jivatma07__j1game_over_mono.wav");
-const levelUpSound = new Audio("sounds/404359__kagateni__success2.wav");
 
 // Add click listener for start buttons
 startButton.addEventListener('click', () => {
@@ -44,29 +41,20 @@ function handleUserClick(event) {
 //Generate next color in the sequence
 function nextSequence() {
     userPattern = [];
-    level++;
-    statusText.innerHTML = "LEVEL" + level;
 
-    //Play level-up sound
-    levelUpSound.currentTime = 0;
-    levelUpSound.play();
+    let randomColor = randomColorGenerator();
+    randomColorPattern.push(randomColor);
 
-    // Delay before flashing the next sequence
-    setTimeout(() => {
-        let randomColor = randomColorGenerator();
-        randomColorPattern.push(randomColor);
-
-        // Flash each color in the pattern with delay
-        let i = 0;
-        const interval = setInterval(() => {
-            flashButton(randomColorPattern[i]);
-            console.log("Generated color : " + randomColorPattern[i]);
-            i++;
-            if (i >= randomColorPattern.length) {
-                clearInterval(interval);
-            }
-        }, 600);
-    }, 800);
+    // Flash each color in the pattern with delay
+    let i = 0;
+    const interval = setInterval(() => {
+        flashButton(randomColorPattern[i]);
+        console.log("Generated color : " + randomColorPattern[i]);
+        i++;
+        if (i >= randomColorPattern.length) {
+            clearInterval(interval);
+        }
+    }, 600);
 }
 
 // Generate one random color
@@ -114,6 +102,8 @@ function flashButton(color) {
 function checkPattern(currentIndex) {
     if (userPattern[currentIndex] === randomColorPattern[currentIndex]) {
         if (userPattern.length == randomColorPattern.length) {
+            score++;
+            scoreUpdate(score);
             setTimeout(nextSequence, 1000);
         }
     } else {
@@ -121,20 +111,21 @@ function checkPattern(currentIndex) {
     }
 }
 
+// Function to update score
+function scoreUpdate(score) {
+    scoreBoard.innerHTML = score;
+}
+
 // Game Over state
 function gameOver() {
-    statusText.innerHTML = "Game Over!";
-
     gameOverSound.currentTime = 0;
     gameOverSound.play();
-
     document.getElementById("game-over-popup").classList.remove("hidden");
 
     // Reset
-    startButton.classList.remove('disabled'); 
+    startButton.classList.remove('disabled');
     startButton.disabled = false;
-    level = 0;
-    score = 0;
+    scoreUpdate(0);
     randomColorPattern = [];
     userPattern = [];
 }
