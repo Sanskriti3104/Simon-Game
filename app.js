@@ -7,6 +7,8 @@ let score = 0;
 let randomColorPattern = [];
 let userPattern = [];
 let colors = ['red', 'green', 'blue', 'yellow'];
+let highScore = localStorage.getItem("highScore") || 0;
+document.querySelector("#high-score").textContent = highScore;
 
 // Sounds
 const redSound = new Audio("sounds/562760__ion__e3.mp3");
@@ -115,6 +117,11 @@ function checkPattern(currentIndex) {
 // Function to update score
 function scoreUpdate(score) {
     scoreBoard.innerHTML = score;
+    if(score > highScore){
+        highScore = score;
+        localStorage.setItem("highScore",highScore);
+        document.querySelector("#high-score").textContent = highScore;
+    }
 }
 
 // Game Over state
