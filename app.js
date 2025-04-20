@@ -3,6 +3,8 @@ const scoreBoard = document.getElementById("score-value");
 const startButton = document.getElementById("start-btn");
 const popup = document.getElementById('popup');
 
+let userTurn = false;
+disableColorButtons(); 
 let score = 0;
 let randomColorPattern = [];
 let userPattern = [];
@@ -16,6 +18,19 @@ const greenSound = new Audio("sounds/562758__ion__c4.mp3");
 const blueSound = new Audio("sounds/562752__ion__b3.mp3");
 const yellowSound = new Audio("sounds/562761__ion__g3.mp3");
 const gameOverSound = new Audio("sounds/173859__jivatma07__j1game_over_mono.wav");
+
+// Function to disable click
+function disableColorButtons() {
+    colorButtons.forEach(button => {
+        button.style.pointerEvents = "none"; 
+    });
+}
+
+function enableColorButtons() {
+    colorButtons.forEach(button => {
+        button.style.pointerEvents = "auto";
+    });
+}
 
 // Add click listener for start buttons
 startButton.addEventListener('click', () => {
@@ -32,16 +47,20 @@ function nextSequence() {
     let randomColor = randomColorGenerator();
     randomColorPattern.push(randomColor);
 
+    userTurn = false;
+    disableColorButtons(); 
+
     // Flash each color in the pattern with delay
     let i = 0;
     const interval = setInterval(() => {
         flashButton(randomColorPattern[i]);
-        console.log("Generated color : " + randomColorPattern[i]);
         i++;
         if (i >= randomColorPattern.length) {
             clearInterval(interval);
+            userTurn = true;
+            enableColorButtons();
         }
-    }, 600);
+    }, 400);
 }
 
 // Add click listener for all buttons
@@ -49,15 +68,17 @@ colorButtons.forEach(button => {
     button.addEventListener('click', handleUserClick)
 });
 
-//// Handles user's color clicks
+// Handles user's color clicks
 function handleUserClick(event) {
-    const userChosenColor = event.target.id;
-    userPattern.push(userChosenColor);
-    flashButton(userChosenColor);
-    console.log("User Chosen Color : " + userChosenColor);
+    if (userTurn) {
+        const userChosenColor = event.target.id;
+        userPattern.push(userChosenColor);
+        flashButton(userChosenColor);
+        // console.log("User Chosen Color : " + userChosenColor);
 
-    //Check the user's answer after each click
-    checkPattern(userPattern.length - 1);
+        //Check the user's answer after each click
+        checkPattern(userPattern.length - 1);
+    }
 }
 
 // Generate one random color
@@ -105,9 +126,11 @@ function flashButton(color) {
 function checkPattern(currentIndex) {
     if (userPattern[currentIndex] === randomColorPattern[currentIndex]) {
         if (userPattern.length == randomColorPattern.length) {
+            userTurn = false;
+            disableColorButtons(); 
             score++;
             scoreUpdate(score);
-            setTimeout(nextSequence, 1000);
+            setTimeout(nextSequence, 800);
         }
     } else {
         gameOver();
@@ -117,9 +140,9 @@ function checkPattern(currentIndex) {
 // Function to update score
 function scoreUpdate(score) {
     scoreBoard.innerHTML = score;
-    if(score > highScore){
+    if (score > highScore) {
         highScore = score;
-        localStorage.setItem("highScore",highScore);
+        localStorage.setItem("highScore", highScore);
         document.querySelector("#high-score").textContent = highScore;
     }
 }
@@ -137,7 +160,7 @@ function gameOver() {
         popup.style.display = 'none';
         gameContainer.classList.remove('blur');
         resetGame();
-    }, 3000);
+    }, 2000);
 }
 
 // Function to reset the game 
@@ -146,6 +169,8 @@ function resetGame() {
     startButton.disabled = false;
     score = 0;
     scoreUpdate(score);
+    userTurn = false;
+    disableColorButtons();
     randomColorPattern = [];
     userPattern = [];
 }
