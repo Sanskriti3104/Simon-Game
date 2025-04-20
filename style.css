@@ -188,81 +188,81 @@ body {
 /* RESPONSIVENESS */
 @media (max-width: 768px) {
     #simon-game {
-        gap: 1.5rem;
+        gap: 1.7rem;
     }
 
     .game-header h1 {
-        font-size: 2.4rem;
+        font-size: 2.5rem;
     }
 
     .game-description p {
-        font-size: 1rem;
-        padding: 0 1rem;
+        font-size: 1.05rem;
+        padding: 0 1.1rem;
     }
 
     #start-btn {
-        padding: 0.5rem 1.2rem;
-        font-size: 0.95rem;
-    }
-
-    #game-display {
-        height: 18rem;
-        width: 18rem;
-        gap: 6px;
-        padding: 6px;
-    }
-
-    .color-button {
-        width: calc(50% - 6px);
-        height: calc(50% - 6px);
-    }
-
-    .score-board p {
+        padding: 0.55rem 1.3rem;
         font-size: 1rem;
     }
 
+    #game-display {
+        height: 19rem;
+        width: 19rem;
+        gap: 7px;
+        padding: 7px;
+    }
+
+    .color-button {
+        width: calc(50% - 7px);
+        height: calc(50% - 7px);
+    }
+
+    .score-board p {
+        font-size: 1.05rem;
+    }
+
     .popup-box {
-        font-size: 1.5rem;
-        padding: 25px 30px;
+        font-size: 1.6rem;
+        padding: 26px 32px;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        padding: 1rem;
+        padding: 1.1rem;
     }
 
     .game-header h1 {
-        font-size: 2rem;
+        font-size: 2.1rem;
     }
 
     .game-description p {
-        font-size: 0.95rem;
+        font-size: 0.98rem;
     }
 
     #game-display {
-        height: 15rem;
-        width: 15rem;
-        gap: 5px;
-        padding: 5px;
+        height: 16rem;
+        width: 16rem;
+        gap: 5.5px;
+        padding: 5.5px;
     }
 
     #start-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .color-button {
-        width: calc(50% - 5px);
-        height: calc(50% - 5px);
-    }
-
-    .score-board p {
+        padding: 0.55rem 1.1rem;
         font-size: 0.95rem;
     }
 
+    .color-button {
+        width: calc(50% - 5.5px);
+        height: calc(50% - 5.5px);
+    }
+
+    .score-board p {
+        font-size: 0.98rem;
+    }
+
     .popup-box {
-        font-size: 1.3rem;
-        padding: 20px 25px;
+        font-size: 1.4rem;
+        padding: 22px 27px;
     }
 }

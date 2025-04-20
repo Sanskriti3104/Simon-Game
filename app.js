@@ -26,6 +26,7 @@ function disableColorButtons() {
     });
 }
 
+// Function to enable click
 function enableColorButtons() {
     colorButtons.forEach(button => {
         button.style.pointerEvents = "auto";
@@ -74,7 +75,6 @@ function handleUserClick(event) {
         const userChosenColor = event.target.id;
         userPattern.push(userChosenColor);
         flashButton(userChosenColor);
-        // console.log("User Chosen Color : " + userChosenColor);
 
         //Check the user's answer after each click
         checkPattern(userPattern.length - 1);
